@@ -1,5 +1,5 @@
 import { NetworkClient } from "../../src/network-client";
-import { AccountData } from "../../generated/rippled_pb";
+import { AccountData, InjectionRequest, InjectionResponse } from "../../generated/rippled_pb";
 import { AccountInfo } from "../../generated/rippled_pb";
 import { AccountInfoRequest } from "../../generated/rippled_pb";
 
@@ -14,12 +14,22 @@ class FakeNetworkClient implements NetworkClient {
   ): Promise<AccountInfo> {
     const accountData = new AccountData();
     accountData.setBalance("4000");
+    accountData.setSequence(1);
 
     const accountInfo = new AccountInfo();
     accountInfo.setAccountData(accountData);
 
     return new Promise((resolve, _reject) => {
       resolve(accountInfo);
+    });
+  }
+
+  injectOperation(_injectionRequest: InjectionRequest): Promise<InjectionResponse> {
+    const injectionResponse = new InjectionResponse();
+    injectionResponse.setOperationHash("operation_hash");
+
+    return new Promise((resolve, _reject) => {
+      resolve(injectionResponse);
     });
   }
 }

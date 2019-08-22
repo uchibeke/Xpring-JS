@@ -1,4 +1,4 @@
-import { AccountInfoRequest, AccountInfo } from "../generated/rippled_pb";
+import { AccountInfoRequest, AccountInfo, InjectionRequest, InjectionResponse } from "../generated/rippled_pb";
 
 /**
  * An error that can occur when making a request.
@@ -14,4 +14,5 @@ export interface NetworkServiceError {
  */
 export interface NetworkClient {
   getAccountInfo(accountInfoRequest: AccountInfoRequest): Promise<AccountInfo>;
+  injectOperation(injectionRequest: InjectionRequest): Promise<InjectionResponse>;
 }
