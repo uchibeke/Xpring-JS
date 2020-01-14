@@ -1,12 +1,13 @@
 import { XpringClientDecorator } from "./xpring-client-decorator";
 import { Wallet } from "xpring-common-js";
 import RawTransactionStatus from "./raw-transaction-status";
+import TransactionStatus from "./transaction-status";
 
 /* global BigInt */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 async function sleep(milliseconds: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+  return new Promise((resolve): number => setTimeout(resolve, milliseconds));
 }
 
 /**
@@ -16,13 +17,13 @@ class ReliableSubmissionXpringClient implements XpringClientDecorator {
   public constructor(private readonly decoratedClient: XpringClientDecorator) {}
 
   public async getBalance(address: string): Promise<BigInt> {
-    return await this.decoratedClient.getBalance(address);
+    return this.decoratedClient.getBalance(address);
   }
 
   public async getTransactionStatus(
     transactionHash: string
-  ): Promise<import("./transaction-status").default> {
-    return await this.decoratedClient.getTransactionStatus(transactionHash);
+  ): Promise<TransactionStatus> {
+    return this.decoratedClient.getTransactionStatus(transactionHash);
   }
 
   public async send(
@@ -46,7 +47,7 @@ class ReliableSubmissionXpringClient implements XpringClientDecorator {
     );
     const lastLedgerSequence = rawTransactionStatus.getLastLedgerSequence();
     if (lastLedgerSequence == 0) {
-      return Promise.reject(
+      throw new Error(
         "The transaction did not have a lastLedgerSequence field so transaction status cannot be reliably determined."
       );
     }
@@ -72,13 +73,13 @@ class ReliableSubmissionXpringClient implements XpringClientDecorator {
   }
 
   public async getLastValidatedLedgerSequence(): Promise<number> {
-    return await this.decoratedClient.getLastValidatedLedgerSequence();
+    return this.decoratedClient.getLastValidatedLedgerSequence();
   }
 
   public async getRawTransactionStatus(
     transactionHash: string
   ): Promise<RawTransactionStatus> {
-    return await this.decoratedClient.getRawTransactionStatus(transactionHash);
+    return this.decoratedClient.getRawTransactionStatus(transactionHash);
   }
 }
 

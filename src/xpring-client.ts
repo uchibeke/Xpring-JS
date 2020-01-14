@@ -36,7 +36,7 @@ class XpringClient {
    * @returns A `BigInt` representing the number of drops of XRP in the account.
    */
   public async getBalance(address: string): Promise<BigInt> {
-    return await this.decoratedClient.getBalance(address);
+    return this.decoratedClient.getBalance(address);
   }
 
   /**
@@ -48,7 +48,7 @@ class XpringClient {
   public async getTransactionStatus(
     transactionHash: string
   ): Promise<TransactionStatus> {
-    return await this.decoratedClient.getTransactionStatus(transactionHash);
+    return this.decoratedClient.getTransactionStatus(transactionHash);
   }
 
   /**
@@ -64,7 +64,7 @@ class XpringClient {
     destination: string,
     sender: Wallet
   ): Promise<string> {
-    return await this.decoratedClient.send(amount, destination, sender);
+    return this.decoratedClient.send(amount, destination, sender);
   }
 }
 
