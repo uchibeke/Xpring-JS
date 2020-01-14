@@ -1,14 +1,14 @@
 import {
   GetAccountInfoRequest,
   GetAccountInfoResponse
-} from "../generated/rpc/v1/account_info_pb";
-import { GetFeeRequest, GetFeeResponse } from "../generated/rpc/v1/fee_pb";
-import { GetTxRequest, GetTxResponse } from "../generated/rpc/v1/tx_pb";
+} from "./generated/rpc/v1/account_info_pb";
+import { GetFeeRequest, GetFeeResponse } from "./generated/rpc/v1/fee_pb";
+import { GetTxRequest, GetTxResponse } from "./generated/rpc/v1/tx_pb";
 import {
   SubmitTransactionRequest,
   SubmitTransactionResponse
-} from "../generated/rpc/v1/submit_pb";
-import { XRPLedgerAPIServiceClient } from "../generated/rpc/v1/xrp_ledger_grpc_pb";
+} from "./generated/rpc/v1/submit_pb";
+import { XRPLedgerAPIServiceClient } from "./generated/rpc/v1/xrp_ledger_grpc_pb";
 
 import { NetworkClient } from "./network-client";
 import { credentials } from "grpc";
