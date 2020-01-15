@@ -53,15 +53,9 @@ export class FakeLegacyNetworkClientResponses {
    * @param getTransactionStatusResponse The response or error that will be returned from the getTransactionStatus request. Defaults to the default transaction status response.
    */
   public constructor(
-    public readonly getAccountInfoResponse: Response<
-      AccountInfo
-    > = FakeLegacyNetworkClientResponses.defaultAccountInfoResponse(),
-    public readonly getFeeResponse: Response<
-      Fee
-    > = FakeLegacyNetworkClientResponses.defaultFeeResponse(),
-    public readonly submitSignedTransactionResponse: Response<
-      SubmitSignedTransactionResponse
-    > = FakeLegacyNetworkClientResponses.defaultSubmitSignedTransactionResponse(),
+    public readonly getAccountInfoResponse: Response<AccountInfo> = FakeLegacyNetworkClientResponses.defaultAccountInfoResponse(),
+    public readonly getFeeResponse: Response<Fee> = FakeLegacyNetworkClientResponses.defaultFeeResponse(),
+    public readonly submitSignedTransactionResponse: Response<SubmitSignedTransactionResponse> = FakeLegacyNetworkClientResponses.defaultSubmitSignedTransactionResponse(),
     public readonly getLatestValidatedLedgerSequenceResponse: Response<LedgerSequence> = FakeLegacyNetworkClientResponses.defaultLedgerSequenceResponse(),
     public readonly getTransactionStatusResponse: Response<TransactionStatus> = FakeLegacyNetworkClientResponses.defaultTransactionStatusResponse()
   ) {}
@@ -98,7 +92,10 @@ export class FakeLegacyNetworkClientResponses {
   public static defaultSubmitSignedTransactionResponse(): SubmitSignedTransactionResponse {
     const submitSignedTransactionResponse = new SubmitSignedTransactionResponse();
     submitSignedTransactionResponse.setEngineResult("tesSUCCESS");
-    submitSignedTransactionResponse.setEngineResultCode(0);
+    const defaultEngineResultCode = 0;
+    submitSignedTransactionResponse.setEngineResultCode(
+      defaultEngineResultCode
+    );
     submitSignedTransactionResponse.setEngineResultMessage(
       "The transaction was applied. Only final in a validated ledger."
     );
@@ -112,7 +109,8 @@ export class FakeLegacyNetworkClientResponses {
    */
   public static defaultLedgerSequenceResponse(): LedgerSequence {
     const ledgerSequence = new LedgerSequence();
-    ledgerSequence.setIndex(12);
+    const defaultLedgerSequenceIndex = 12;
+    ledgerSequence.setIndex(defaultLedgerSequenceIndex);
 
     return ledgerSequence;
   }
@@ -137,7 +135,7 @@ export class FakeLegacyNetworkClient implements LegacyNetworkClient {
     private readonly responses: FakeLegacyNetworkClientResponses = FakeLegacyNetworkClientResponses.defaultSuccessfulResponses
   ) {}
 
-  getAccountInfo(
+  public async getAccountInfo(
     _accountInfoRequest: GetAccountInfoRequest
   ): Promise<AccountInfo> {
     const accountInfoResponse = this.responses.getAccountInfoResponse;
@@ -148,7 +146,7 @@ export class FakeLegacyNetworkClient implements LegacyNetworkClient {
     return Promise.resolve(accountInfoResponse);
   }
 
-  getFee(_feeRequest: GetFeeRequest): Promise<Fee> {
+  public async getFee(_feeRequest: GetFeeRequest): Promise<Fee> {
     const feeResponse = this.responses.getFeeResponse;
     if (feeResponse instanceof Error) {
       return Promise.reject(feeResponse);
@@ -157,7 +155,7 @@ export class FakeLegacyNetworkClient implements LegacyNetworkClient {
     return Promise.resolve(feeResponse);
   }
 
-  submitSignedTransaction(
+  public async submitSignedTransaction(
     _submitSignedTransactionRequest: SubmitSignedTransactionRequest
   ): Promise<SubmitSignedTransactionResponse> {
     const submitSignedTransactionResponse = this.responses
@@ -169,19 +167,23 @@ export class FakeLegacyNetworkClient implements LegacyNetworkClient {
     return Promise.resolve(submitSignedTransactionResponse);
   }
 
-  getLatestValidatedLedgerSequence(
+  public async getLatestValidatedLedgerSequence(
     _getLatestValidatedLedgerSequenceRequest: GetLatestValidatedLedgerSequenceRequest
   ): Promise<LedgerSequence> {
-    const ledgerSequenceResponse = this.responses.getLatestValidatedLedgerSequenceResponse;
+    const ledgerSequenceResponse = this.responses
+      .getLatestValidatedLedgerSequenceResponse;
     if (ledgerSequenceResponse instanceof Error) {
       return Promise.reject(ledgerSequenceResponse);
     }
 
-    return Promise.resolve(ledgerSequenceResponse);  
+    return Promise.resolve(ledgerSequenceResponse);
   }
 
-  getTransactionStatus( _getTransactionStatusRequest: GetTransactionStatusRequest): Promise<TransactionStatus> {
-    const transactionStatusResponse = this.responses.getTransactionStatusResponse;
+  public async getTransactionStatus(
+    _getTransactionStatusRequest: GetTransactionStatusRequest
+  ): Promise<TransactionStatus> {
+    const transactionStatusResponse = this.responses
+      .getTransactionStatusResponse;
     if (transactionStatusResponse instanceof Error) {
       return Promise.reject(transactionStatusResponse);
     }

@@ -145,7 +145,7 @@ class LegacyDefaultXpringClient implements XpringClientDecorator {
     transaction.setLastLedgerSequence(ledgerSequence + ledgerSequenceMargin);
     transaction.setSigningPublicKeyHex(sender.getPublicKey());
 
-    var signedTransaction;
+    let signedTransaction;
     try {
       signedTransaction = Signer.signTransaction(transaction, sender);
     } catch (signingError) {

@@ -2,13 +2,16 @@ import { NetworkClient } from "../../src/network-client";
 import {
   GetAccountInfoRequest,
   GetAccountInfoResponse
-} from "../../generated/rpc/v1/account_info_pb";
-import { GetFeeRequest, GetFeeResponse } from "../../generated/rpc/v1/fee_pb";
-import { GetTxRequest, GetTxResponse } from "../..//generated/rpc/v1/tx_pb";
+} from "../../src/generated/rpc/v1/account_info_pb";
+import {
+  GetFeeRequest,
+  GetFeeResponse
+} from "../../src/generated/rpc/v1/fee_pb";
+import { GetTxRequest, GetTxResponse } from "../../src/generated/rpc/v1/tx_pb";
 import {
   SubmitTransactionRequest,
   SubmitTransactionResponse
-} from "../../generated/rpc/v1/submit_pb";
+} from "../../src/generated/rpc/v1/submit_pb";
 
 /**
  * A response for a request to retrieve type T. Either an instance of T, or an error.
@@ -48,18 +51,10 @@ export class FakeNetworkClientResponses {
    * @param getTxResponse The response or error that will be returned from the getTransactionStatus request. Defaults to the default transaction status response.
    */
   public constructor(
-    public readonly getAccountInfoResponse: Response<
-    GetAccountInfoResponse
-    > = FakeNetworkClientResponses.defaultAccountInfoResponse(),
-    public readonly getFeeResponse: Response<
-    GetFeeResponse
-    > = FakeNetworkClientResponses.defaultFeeResponse(),
-    public readonly submitransactionResponse: Response<
-    SubmitTransactionResponse
-    > = FakeNetworkClientResponses.defaultSubmitTransactionResponse(),
-    public readonly getTransactionStatusResponse: Response<
-    GetTxResponse
-    > = FakeNetworkClientResponses.defaultGetTxResponse()
+    public readonly getAccountInfoResponse: Response<GetAccountInfoResponse> = FakeNetworkClientResponses.defaultAccountInfoResponse(),
+    public readonly getFeeResponse: Response<GetFeeResponse> = FakeNetworkClientResponses.defaultFeeResponse(),
+    public readonly submitransactionResponse: Response<SubmitTransactionResponse> = FakeNetworkClientResponses.defaultSubmitTransactionResponse(),
+    public readonly getTransactionStatusResponse: Response<GetTxResponse> = FakeNetworkClientResponses.defaultGetTxResponse()
   ) {}
 
   /**
@@ -99,7 +94,7 @@ export class FakeNetworkClient implements NetworkClient {
     private readonly responses: FakeNetworkClientResponses = FakeNetworkClientResponses.defaultSuccessfulResponses
   ) {}
 
-  getAccountInfo(
+  public async getAccountInfo(
     _accountInfoRequest: GetAccountInfoRequest
   ): Promise<GetAccountInfoResponse> {
     const accountInfoResponse = this.responses.getAccountInfoResponse;
@@ -110,7 +105,7 @@ export class FakeNetworkClient implements NetworkClient {
     return Promise.resolve(accountInfoResponse);
   }
 
-  getFee(_feeRequest: GetFeeRequest): Promise<GetFeeResponse> {
+  public async getFee(_feeRequest: GetFeeRequest): Promise<GetFeeResponse> {
     const feeResponse = this.responses.getFeeResponse;
     if (feeResponse instanceof Error) {
       return Promise.reject(feeResponse);
@@ -119,11 +114,10 @@ export class FakeNetworkClient implements NetworkClient {
     return Promise.resolve(feeResponse);
   }
 
-  submitTransaction(
+  public async submitTransaction(
     _submitSignedTransactionRequest: SubmitTransactionRequest
   ): Promise<SubmitTransactionResponse> {
-    const submitTransactionResponse = this.responses
-      .submitransactionResponse;
+    const submitTransactionResponse = this.responses.submitransactionResponse;
     if (submitTransactionResponse instanceof Error) {
       return Promise.reject(submitTransactionResponse);
     }
@@ -131,7 +125,7 @@ export class FakeNetworkClient implements NetworkClient {
     return Promise.resolve(submitTransactionResponse);
   }
 
-  getTx(
+  public async getTx(
     _getTransactionStatusRequest: GetTxRequest
   ): Promise<GetTxResponse> {
     const transactionStatusResponse = this.responses

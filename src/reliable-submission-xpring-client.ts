@@ -42,7 +42,7 @@ class ReliableSubmissionXpringClient implements XpringClientDecorator {
     await sleep(ledgerCloseTimeMs);
 
     // Get transaction status.
-    var rawTransactionStatus = await this.getRawTransactionStatus(
+    let rawTransactionStatus = await this.getRawTransactionStatus(
       transactionHash
     );
     const lastLedgerSequence = rawTransactionStatus.getLastLedgerSequence();
@@ -53,7 +53,7 @@ class ReliableSubmissionXpringClient implements XpringClientDecorator {
     }
 
     // Retrieve the latest ledger index.
-    var latestLedgerSequence = await this.getLastValidatedLedgerSequence();
+    let latestLedgerSequence = await this.getLastValidatedLedgerSequence();
 
     // Poll until the transaction is validated, or until the lastLedgerSequence has been passed.
     while (

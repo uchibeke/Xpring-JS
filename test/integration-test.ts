@@ -28,14 +28,14 @@ const xpringClient = new XpringClient(grpcURL);
 const amount = BigInt("1");
 
 describe("Xpring JS Integration Tests", function(): void {
-  it("Get Account Balance", async function() {
+  it("Get Account Balance", async function(): Promise<void> {
     this.timeout(timeoutMs);
 
     const balance = await xpringClient.getBalance(recipientAddress);
     assert.exists(balance);
   });
 
-  it("Get Transaction Status", async function() {
+  it("Get Transaction Status", async function(): Promise<void> {
     this.timeout(timeoutMs);
 
     const transactionStatus = await xpringClient.getTransactionStatus(
@@ -44,7 +44,7 @@ describe("Xpring JS Integration Tests", function(): void {
     assert.deepEqual(transactionStatus, TransactionStatus.Succeeded);
   });
 
-  it("Send XRP", async function() {
+  it("Send XRP", async function(): Promise<void> {
     this.timeout(timeoutMs);
 
     const result = await xpringClient.send(amount, recipientAddress, wallet);

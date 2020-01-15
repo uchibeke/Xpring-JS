@@ -7,7 +7,6 @@ import {
   WalletGenerationResult
 } from "xpring-common-js";
 import TransactionStatus from "../src/transaction-status";
-import { doesNotReject } from "assert";
 
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
@@ -32,7 +31,7 @@ const fakedRawTransactionStatusValidatedValue = true;
 const fakedRawTransactionStatusTransactionStatusCode = transactionStatusCodeSuccess;
 
 describe("Reliable Submission Xpring Client", function(): void {
-  beforeEach(function() {
+  beforeEach(function(): void {
     fakedRawTransactionStatusValue.setLastLedgerSequence(
       fakedRawTransactionStatusLastLedgerSequenceValue
     );
@@ -55,7 +54,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     );
   });
 
-  it("Get Account Balance - Response Not Modified", async function() {
+  it("Get Account Balance - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN a balance is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getBalance(
       testAddress
@@ -65,7 +64,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedGetBalanceValue);
   });
 
-  it("Get Transaction Status - Response Not Modified", async function() {
+  it("Get Transaction Status - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN a transaction status is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getTransactionStatus(
       testAddress
@@ -75,7 +74,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedTransactionStatusValue);
   });
 
-  it("Get Latest Ledger Sequence - Response Not Modified", async function() {
+  it("Get Latest Ledger Sequence - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN the latest ledger sequence is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getLastValidatedLedgerSequence();
 
@@ -83,7 +82,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedLastLedgerSequenceValue);
   });
 
-  it("Get Raw Transaction Status - Response Not Modified", async function() {
+  it("Get Raw Transaction Status - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN a raw transaction status is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getRawTransactionStatus(
       testAddress
@@ -93,12 +92,12 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedRawTransactionStatusValue);
   });
 
-  it("Send - Returns when the latestLedgerSequence is too low", async function() {
+  it("Send - Returns when the latestLedgerSequence is too low", async function(): Promise<void> {
     // Increase timeout because `setTimeout` is only accurate to 1500ms.
     this.timeout(5000);
 
     // GIVEN A ledger sequence number that will increment in 200ms.
-    setTimeout(() => {
+    setTimeout((): void => {
       const latestLedgerSequence =
         fakedRawTransactionStatusLastLedgerSequenceValue + 1;
       this.fakeXpringClient.latestLedgerSequence = latestLedgerSequence;
@@ -115,12 +114,12 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(transactionHash, fakedSendValue);
   });
 
-  it("Send - Returns when the transaction is validated", async function() {
+  it("Send - Returns when the transaction is validated", async function(): Promise<void> {
     // Increase timeout because `setTimeout` is only accurate to 1500ms.
     this.timeout(5000);
 
     // GIVEN A transaction that will validate itself in 200ms.
-    setTimeout(() => {
+    setTimeout((): void => {
       fakedRawTransactionStatusValue.setValidated(true);
     }, 200);
 
@@ -135,7 +134,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(transactionHash, fakedSendValue);
   });
 
-  it("Send - Throws when transaction doesn't have a last ledger sequence", function(done) {
+  it("Send - Throws when transaction doesn't have a last ledger sequence", function(done): void {
     // Increase timeout because the poll interview is 4s.
     this.timeout(5000);
 
@@ -146,8 +145,8 @@ describe("Reliable Submission Xpring Client", function(): void {
 
     // WHEN `send` is called THEN the promise is rejected.
     this.reliableSubmissionClient.send("1", testAddress, wallet).then(
-      function() {},
-      function() {
+      function(): void {},
+      function(): void {
         done();
       }
     );

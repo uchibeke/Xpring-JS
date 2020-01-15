@@ -1,7 +1,7 @@
 import { XpringClientDecorator } from "./xpring-client-decorator";
 import TransactionStatus from "./transaction-status";
 import { Wallet } from "xpring-common-js";
-import { TransactionStatus as RawTransactionStatus } from "../generated/legacy/transaction_status_pb";
+import { TransactionStatus as RawTransactionStatus } from "./generated/legacy/transaction_status_pb";
 
 /* global BigInt */
 
