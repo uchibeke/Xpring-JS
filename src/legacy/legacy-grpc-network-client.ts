@@ -1,4 +1,4 @@
-import { XRPLedgerAPIClient } from "../generated/legacy/Xrp_ledgerServiceClientPb";
+import { XRPLedgerAPIClient } from "../generated/legacy/xrp_ledger_grpc_web_pb";
 import { AccountInfo } from "../generated/legacy/account_info_pb";
 import { Fee } from "../generated/legacy/fee_pb";
 import { GetFeeRequest } from "../generated/legacy/get_fee_request_pb";

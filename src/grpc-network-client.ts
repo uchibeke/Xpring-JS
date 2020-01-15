@@ -8,7 +8,7 @@ import {
   SubmitTransactionRequest,
   SubmitTransactionResponse
 } from "./generated/rpc/v1/submit_pb";
-import { XRPLedgerAPIServiceClient } from "./generated/rpc/v1/Xrp_ledgerServiceClientPb";
+import { XRPLedgerAPIServiceClient } from "./generated/rpc/v1/xrp_ledger_grpc_web_pb";
 
 import { NetworkClient } from "./network-client";
 

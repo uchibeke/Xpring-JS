@@ -19,8 +19,8 @@
     "build": "npm run clean && ./scripts/regenerate_protos.sh && npm run lint && webpack",
     "clean": "rm -rf ./src/generated ./dist ./build",
     "pretest": "./scripts/regenerate_protos.sh && tsc",
-    "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix",
+    "lint": "eslint ./src/*.ts",
+    "lint:fix": "eslint ./src/*.ts --fix",
     "test": "npm run lint && nyc mocha",
     "prepublishOnly": "npm test && tsc -d"
   },
