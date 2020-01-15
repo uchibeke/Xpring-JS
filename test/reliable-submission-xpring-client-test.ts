@@ -144,11 +144,6 @@ describe("Reliable Submission Xpring Client", function(): void {
     this.fakeXpringClient.getRawTransactionStatusValue = malformedRawTransactionStatus;
 
     // WHEN `send` is called THEN the promise is rejected.
-    this.reliableSubmissionClient.send("1", testAddress, wallet).then(
-      function(): void {},
-      function(): void {
-        done();
-      }
-    );
+    this.reliableSubmissionClient.send("1", testAddress, wallet).then((): void => { return }).catch((): void => done());
   });
 });

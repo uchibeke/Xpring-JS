@@ -22,7 +22,7 @@ class DefaultXpringClient implements XpringClientDecorator {
   /**
    * Create a new DefaultXpringClient.
    */
-  public constructor() {}
+  public constructor() {} // eslint-disable-line @typescript-eslint/no-empty-function
 
   /**
    * Retrieve the balance for the given address.
