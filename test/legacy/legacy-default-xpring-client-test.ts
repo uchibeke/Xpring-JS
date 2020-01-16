@@ -36,6 +36,7 @@ const transactionStatusCodeFailure = "tecFAILURE";
 const transactionHash = "DEADBEEF";
 
 describe("Legacy Default Xpring Client", function(): void {
+  // eslint-disable-next-line prettier/prettier
   it("Get Account Balance - successful response", async function(): Promise<void> {
     // GIVEN a LegacyDefaultXpringClient.
     const xpringClient = new LegacyDefaultXpringClient(
@@ -104,6 +105,7 @@ describe("Legacy Default Xpring Client", function(): void {
     });
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Send XRP Transaction - success with BigInt", async function(): Promise<void> {
     // GIVEN a XpringClient, a wallet, and a BigInt denomonated amount.
     const xpringClient = new LegacyDefaultXpringClient(
@@ -132,6 +134,7 @@ describe("Legacy Default Xpring Client", function(): void {
     assert.strictEqual(transactionHash, expectedTransactionHash);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Send XRP Transaction - success with number", async function(): Promise<void> {
     // GIVEN a XpringClient, a wallet, and a number denominated amount.
     const xpringClient = new LegacyDefaultXpringClient(
@@ -160,6 +163,7 @@ describe("Legacy Default Xpring Client", function(): void {
     assert.strictEqual(transactionHash, expectedTransactionHash);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Send XRP Transaction - success with string", async function(): Promise<void> {
     // GIVEN a XpringClient, a wallet, and a numeric string denominated amount.
     const xpringClient = new LegacyDefaultXpringClient(
@@ -352,6 +356,7 @@ describe("Legacy Default Xpring Client", function(): void {
       });
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Transaction Status - Unvalidated Transaction and Failure Code", async function(): Promise<void> {
     // GIVEN a XpringClient which will return an unvalidated transaction with a failure code.
     const transactionStatusResponse = new TransactionStatusResponse();
@@ -380,6 +385,7 @@ describe("Legacy Default Xpring Client", function(): void {
     assert.deepEqual(transactionStatus, TransactionStatus.Pending);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Transaction Status - Unvalidated Transaction and Success Code", async function(): Promise<void> {
     // GIVEN a XpringClient which will return an unvalidated transaction with a success code.
     const transactionStatusResponse = new TransactionStatusResponse();
@@ -408,6 +414,7 @@ describe("Legacy Default Xpring Client", function(): void {
     assert.deepEqual(transactionStatus, TransactionStatus.Pending);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Transaction Status - Validated Transaction and Failure Code", async function(): Promise<void> {
     // GIVEN a XpringClient which will return an validated transaction with a failure code.
     const transactionStatusResponse = new TransactionStatusResponse();
@@ -436,6 +443,7 @@ describe("Legacy Default Xpring Client", function(): void {
     assert.deepEqual(transactionStatus, TransactionStatus.Failed);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Transaction Status - Validated Transaction and Success Code", async function(): Promise<void> {
     // GIVEN a XpringClient which will return an validated transaction with a success code.
     const transactionStatusResponse = new TransactionStatusResponse();

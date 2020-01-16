@@ -54,6 +54,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     );
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Account Balance - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN a balance is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getBalance(
@@ -64,6 +65,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedGetBalanceValue);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Transaction Status - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN a transaction status is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getTransactionStatus(
@@ -74,6 +76,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedTransactionStatusValue);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Latest Ledger Sequence - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN the latest ledger sequence is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getLastValidatedLedgerSequence();
@@ -82,6 +85,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedLastLedgerSequenceValue);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Get Raw Transaction Status - Response Not Modified", async function(): Promise<void> {
     // GIVEN a `ReliableSubmissionXpringClient` decorating a `FakeXpringClient` WHEN a raw transaction status is retrieved.
     const returnedValue = await this.reliableSubmissionClient.getRawTransactionStatus(
@@ -92,6 +96,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(returnedValue, fakedRawTransactionStatusValue);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Send - Returns when the latestLedgerSequence is too low", async function(): Promise<void> {
     // Increase timeout because `setTimeout` is only accurate to 1500ms.
     this.timeout(5000);
@@ -114,6 +119,7 @@ describe("Reliable Submission Xpring Client", function(): void {
     assert.deepEqual(transactionHash, fakedSendValue);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it("Send - Returns when the transaction is validated", async function(): Promise<void> {
     // Increase timeout because `setTimeout` is only accurate to 1500ms.
     this.timeout(5000);
@@ -144,6 +150,11 @@ describe("Reliable Submission Xpring Client", function(): void {
     this.fakeXpringClient.getRawTransactionStatusValue = malformedRawTransactionStatus;
 
     // WHEN `send` is called THEN the promise is rejected.
-    this.reliableSubmissionClient.send("1", testAddress, wallet).then((): void => { return }).catch((): void => done());
+    this.reliableSubmissionClient
+      .send("1", testAddress, wallet)
+      .then((): void => {
+        return;
+      })
+      .catch((): void => done());
   });
 });

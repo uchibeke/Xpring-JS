@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./build",
+    "outDir": "build",
     "target": "ESNext",
     "module": "commonjs",
     "sourceMap": true,
+    "declaration": true,
+    "allowJs": true,
     "removeComments": true,
     "strict": true,
     "resolveJsonModule": true,

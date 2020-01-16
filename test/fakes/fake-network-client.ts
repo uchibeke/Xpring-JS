@@ -42,6 +42,7 @@ export class FakeNetworkClientResponses {
     FakeNetworkClientResponses.defaultError
   );
 
+  /* eslint-disable @typescript-eslint/indent */
   /**
    * Construct a new set of responses.
    *
@@ -51,11 +52,20 @@ export class FakeNetworkClientResponses {
    * @param getTxResponse The response or error that will be returned from the getTransactionStatus request. Defaults to the default transaction status response.
    */
   public constructor(
-    public readonly getAccountInfoResponse: Response<GetAccountInfoResponse> = FakeNetworkClientResponses.defaultAccountInfoResponse(),
-    public readonly getFeeResponse: Response<GetFeeResponse> = FakeNetworkClientResponses.defaultFeeResponse(),
-    public readonly submitransactionResponse: Response<SubmitTransactionResponse> = FakeNetworkClientResponses.defaultSubmitTransactionResponse(),
-    public readonly getTransactionStatusResponse: Response<GetTxResponse> = FakeNetworkClientResponses.defaultGetTxResponse()
+    public readonly getAccountInfoResponse: Response<
+      GetAccountInfoResponse
+    > = FakeNetworkClientResponses.defaultAccountInfoResponse(),
+    public readonly getFeeResponse: Response<
+      GetFeeResponse
+    > = FakeNetworkClientResponses.defaultFeeResponse(),
+    public readonly submitransactionResponse: Response<
+      SubmitTransactionResponse
+    > = FakeNetworkClientResponses.defaultSubmitTransactionResponse(),
+    public readonly getTransactionStatusResponse: Response<
+      GetTxResponse
+    > = FakeNetworkClientResponses.defaultGetTxResponse()
   ) {}
+  /* eslint-enable @typescript-eslint/indent */
 
   /**
    * Construct a default AccountInfoResponse.

@@ -43,6 +43,8 @@ export class FakeLegacyNetworkClientResponses {
     FakeLegacyNetworkClientResponses.defaultError
   );
 
+  /* eslint-disable @typescript-eslint/indent */
+
   /**
    * Construct a new set of responses.
    *
@@ -53,12 +55,24 @@ export class FakeLegacyNetworkClientResponses {
    * @param getTransactionStatusResponse The response or error that will be returned from the getTransactionStatus request. Defaults to the default transaction status response.
    */
   public constructor(
-    public readonly getAccountInfoResponse: Response<AccountInfo> = FakeLegacyNetworkClientResponses.defaultAccountInfoResponse(),
-    public readonly getFeeResponse: Response<Fee> = FakeLegacyNetworkClientResponses.defaultFeeResponse(),
-    public readonly submitSignedTransactionResponse: Response<SubmitSignedTransactionResponse> = FakeLegacyNetworkClientResponses.defaultSubmitSignedTransactionResponse(),
-    public readonly getLatestValidatedLedgerSequenceResponse: Response<LedgerSequence> = FakeLegacyNetworkClientResponses.defaultLedgerSequenceResponse(),
-    public readonly getTransactionStatusResponse: Response<TransactionStatus> = FakeLegacyNetworkClientResponses.defaultTransactionStatusResponse()
+    public readonly getAccountInfoResponse: Response<
+      AccountInfo
+    > = FakeLegacyNetworkClientResponses.defaultAccountInfoResponse(),
+    public readonly getFeeResponse: Response<
+      Fee
+    > = FakeLegacyNetworkClientResponses.defaultFeeResponse(),
+    public readonly submitSignedTransactionResponse: Response<
+      SubmitSignedTransactionResponse
+    > = FakeLegacyNetworkClientResponses.defaultSubmitSignedTransactionResponse(),
+    public readonly getLatestValidatedLedgerSequenceResponse: Response<
+      LedgerSequence
+    > = FakeLegacyNetworkClientResponses.defaultLedgerSequenceResponse(),
+    public readonly getTransactionStatusResponse: Response<
+      TransactionStatus
+    > = FakeLegacyNetworkClientResponses.defaultTransactionStatusResponse()
   ) {}
+
+  /* eslint-enable @typescript-eslint/indent */
 
   /**
    * Construct a default AccountInfoResponse.
