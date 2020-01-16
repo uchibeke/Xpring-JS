@@ -147,7 +147,7 @@ class LegacyDefaultXpringClient implements XpringClientDecorator {
 
     let signedTransaction;
     try {
-      signedTransaction = Signer.signTransaction(transaction, sender);
+      signedTransaction = Signer.signLegacyTransaction(transaction, sender);
     } catch (signingError) {
       const signingErrorMessage =
         LegacyXpringClientErrorMessages.signingFailure +
