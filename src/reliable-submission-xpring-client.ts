@@ -7,7 +7,7 @@ import TransactionStatus from "./transaction-status";
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 async function sleep(milliseconds: number): Promise<void> {
-  return new Promise((resolve): number => setTimeout(resolve, milliseconds));
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
 /**
