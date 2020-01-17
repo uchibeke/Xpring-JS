@@ -5,7 +5,6 @@ import { assert } from "chai";
 import {
   Utils,
   Wallet,
-  WalletGenerationResult,
   TransactionStatus as TransactionStatusResponse
 } from "xpring-common-js";
 
@@ -111,8 +110,11 @@ describe("Legacy Default Xpring Client", function(): void {
     const xpringClient = new LegacyDefaultXpringClient(
       fakeSucceedingNetworkClient
     );
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = BigInt("10");
@@ -121,7 +123,7 @@ describe("Legacy Default Xpring Client", function(): void {
     const transactionHash = await xpringClient.send(
       amount,
       destinationAddress,
-      wallet
+      walletResult.wallet
     );
 
     // THEN the transaction hash exists and is the expected hash
@@ -140,8 +142,11 @@ describe("Legacy Default Xpring Client", function(): void {
     const xpringClient = new LegacyDefaultXpringClient(
       fakeSucceedingNetworkClient
     );
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = 10;
@@ -150,7 +155,7 @@ describe("Legacy Default Xpring Client", function(): void {
     const transactionHash = await xpringClient.send(
       amount,
       destinationAddress,
-      wallet
+      walletResult.wallet
     );
 
     // THEN the transaction hash exists and is the expected hash
@@ -169,8 +174,11 @@ describe("Legacy Default Xpring Client", function(): void {
     const xpringClient = new LegacyDefaultXpringClient(
       fakeSucceedingNetworkClient
     );
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = "10";
@@ -179,7 +187,7 @@ describe("Legacy Default Xpring Client", function(): void {
     const transactionHash = await xpringClient.send(
       amount,
       destinationAddress,
-      wallet
+      walletResult.wallet
     );
 
     // THEN the transaction hash exists and is the expected hash
@@ -197,15 +205,18 @@ describe("Legacy Default Xpring Client", function(): void {
     const xpringClient = new LegacyDefaultXpringClient(
       fakeSucceedingNetworkClient
     );
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = "not_a_number";
 
     // WHEN the account makes a transaction THEN an error is propagated.
     xpringClient
-      .send(amount, destinationAddress, wallet)
+      .send(amount, destinationAddress, walletResult.wallet)
       .catch((error: Error): void => {
         assert.typeOf(error, "Error");
         done();
@@ -223,15 +234,18 @@ describe("Legacy Default Xpring Client", function(): void {
       feeFailureResponses
     );
     const xpringClient = new LegacyDefaultXpringClient(feeFailingNetworkClient);
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = BigInt("10");
 
     // WHEN a payment is attempted THEN an error is propagated.
     xpringClient
-      .send(amount, destinationAddress, wallet)
+      .send(amount, destinationAddress, walletResult.wallet)
       .catch((error: Error): void => {
         assert.typeOf(error, "Error");
         assert.equal(
@@ -247,14 +261,17 @@ describe("Legacy Default Xpring Client", function(): void {
     const xpringClient = new LegacyDefaultXpringClient(
       fakeSucceedingNetworkClient
     );
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress = "rsegqrgSP8XmhCYwL9enkZ9BNDNawfPZnn";
     const amount = BigInt("10");
 
     // WHEN the account makes a transaction THEN an error is thrown.
     xpringClient
-      .send(amount, destinationAddress, wallet)
+      .send(amount, destinationAddress, walletResult.wallet)
       .catch((error: Error): void => {
         assert.typeOf(error, "Error");
         assert.equal(
@@ -276,15 +293,18 @@ describe("Legacy Default Xpring Client", function(): void {
       feeFailureResponses
     );
     const xpringClient = new LegacyDefaultXpringClient(feeFailingNetworkClient);
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = BigInt("10");
 
     // WHEN a payment is attempted THEN an error is propagated.
     xpringClient
-      .send(amount, destinationAddress, wallet)
+      .send(amount, destinationAddress, walletResult.wallet)
       .catch((error: Error): void => {
         assert.typeOf(error, "Error");
         assert.equal(
@@ -307,15 +327,18 @@ describe("Legacy Default Xpring Client", function(): void {
       feeFailureResponses
     );
     const xpringClient = new LegacyDefaultXpringClient(feeFailingNetworkClient);
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = BigInt("10");
 
     // WHEN a payment is attempted THEN an error is propagated.
     xpringClient
-      .send(amount, destinationAddress, wallet)
+      .send(amount, destinationAddress, walletResult.wallet)
       .catch((error: Error): void => {
         assert.typeOf(error, "Error");
         assert.equal(
@@ -337,15 +360,18 @@ describe("Legacy Default Xpring Client", function(): void {
       feeFailureResponses
     );
     const xpringClient = new LegacyDefaultXpringClient(feeFailingNetworkClient);
-    const wallet = (Wallet.generateRandomWallet() as WalletGenerationResult)
-      .wallet;
+    const walletResult = Wallet.generateRandomWallet();
+    if (!walletResult) {
+      assert.fail("undefined", "typeof WalletGenerationResult");
+      return;
+    }
     const destinationAddress =
       "X76YZJgkFzdSLZQTa7UzVSs34tFgyV2P16S3bvC8AWpmwdH";
     const amount = BigInt("10");
 
     // WHEN a payment is attempted THEN an error is propagated.
     xpringClient
-      .send(amount, destinationAddress, wallet)
+      .send(amount, destinationAddress, walletResult.wallet)
       .catch((error: Error): void => {
         assert.typeOf(error, "Error");
         assert.equal(

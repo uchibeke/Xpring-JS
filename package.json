@@ -77,5 +77,14 @@
     ],
     "all": true,
     "check-leaks": true
+  },
+  "mocha": {
+    "require": [
+      "ts-node/register/transpile-only",
+      "source-map-support/register"
+    ],
+    "extension": [
+      "ts"
+    ]
   }
 }
