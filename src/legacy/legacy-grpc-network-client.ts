@@ -31,13 +31,13 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
     getAccountInfoRequest: GetAccountInfoRequest
   ): Promise<AccountInfo> {
     return new Promise((resolve, reject): void => {
-      console.log("Account Info Request: ");
+      console.log("Account Info Request:");
       console.log(getAccountInfoRequest);
       this.grpcClient.getAccountInfo(
         getAccountInfoRequest,
         {},
         (error, response): void => {
-          console.log("Account Info Response: ");
+          console.log("Account Info Response:");
           console.log(response);
 
           console.log("Account Info Error:");
@@ -54,7 +54,14 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
 
   public async getFee(getFeeRequest: GetFeeRequest): Promise<Fee> {
     return new Promise((resolve, reject): void => {
+      console.log("Fee Request:");
+      console.log(getFeeRequest);
       this.grpcClient.getFee(getFeeRequest, {}, (error, response): void => {
+        console.log("Fee Response:");
+        console.log(response);
+
+        console.log("Fee Error:");
+        console.log(error);
         if (error != null || response == null) {
           reject(error);
           return;
@@ -68,10 +75,17 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
     submitSignedTransactionRequest: SubmitSignedTransactionRequest
   ): Promise<SubmitSignedTransactionResponse> {
     return new Promise((resolve, reject): void => {
+      console.log("Submit Signed Request:");
+      console.log(submitSignedTransactionRequest);
       this.grpcClient.submitSignedTransaction(
         submitSignedTransactionRequest,
         {},
         (error, response): void => {
+          console.log("Submit Signed Response:");
+          console.log(response);
+
+          console.log("Submit Signed Error:");
+          console.log(error);
           if (error !== null || response === null) {
             reject(error);
             return;
@@ -86,10 +100,17 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
     getLatestValidatedLedgerSequenceRequest: GetLatestValidatedLedgerSequenceRequest
   ): Promise<LedgerSequence> {
     return new Promise((resolve, reject): void => {
+      console.log("Get Latest Validated Ledger Request:");
+      console.log(getLatestValidatedLedgerSequenceRequest);
       this.grpcClient.getLatestValidatedLedgerSequence(
         getLatestValidatedLedgerSequenceRequest,
         {},
         (error, response): void => {
+          console.log("Get Latest Validated Ledger Response:");
+          console.log(response);
+
+          console.log("Get Latest Validated Ledger Error:");
+          console.log(error);
           if (error != null || response == null) {
             reject(error);
             return;
@@ -104,10 +125,17 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
     getTransactionStatusRequest: GetTransactionStatusRequest
   ): Promise<TransactionStatus> {
     return new Promise((resolve, reject): void => {
+      console.log("Get Transaction Status Request:");
+      console.log(getTransactionStatusRequest);
       this.grpcClient.getTransactionStatus(
         getTransactionStatusRequest,
         {},
         (error, response): void => {
+          console.log("Get Transaction Status Response:");
+          console.log(response);
+
+          console.log("Get Transaction Status Error:");
+          console.log(error);
           if (error != null || response == null) {
             reject(error);
             return;
