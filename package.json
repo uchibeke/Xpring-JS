@@ -64,7 +64,7 @@
   "dependencies": {
     "grpc-web": "1.0.7",
     "xhr2": "0.2.0",
-    "xpring-common-js": "2.1.0"
+    "xpring-common-js": "2.0.1"
   },
   "nyc": {
     "extension": [
