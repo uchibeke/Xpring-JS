@@ -16,8 +16,8 @@
     "build/**/*"
   ],
   "scripts": {
-    "build": "npm run test && tsc -d",
-    "webpack": "npm run test && webpack",
+    "build": "npm run test && tsc -d && ./scripts/copy_typescript_types.sh",
+    "webpack": "npm run test && webpack && ./scripts/copy_typescript_types.sh",
     "clean": "rm -rf ./src/generated ./dist ./build",
     "pretest": "npm run clean && ./scripts/regenerate_protos.sh && npm run lint",
     "lint": "eslint **/*.ts",
