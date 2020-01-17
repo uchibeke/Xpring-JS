@@ -18,6 +18,12 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
   private readonly grpcClient: XRPLedgerAPIClient;
 
   public constructor(grpcURL: string) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (global as any).XMLHttpRequest = require("xhr2");
+    } catch {
+      // Node.js hack
+    }
     this.grpcClient = new XRPLedgerAPIClient(grpcURL);
   }
 
