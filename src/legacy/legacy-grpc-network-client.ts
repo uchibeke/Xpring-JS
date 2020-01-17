@@ -31,10 +31,17 @@ class LegacyGRPCNetworkClient implements LegacyNetworkClient {
     getAccountInfoRequest: GetAccountInfoRequest
   ): Promise<AccountInfo> {
     return new Promise((resolve, reject): void => {
+      console.log("Account Info Request: ");
+      console.log(getAccountInfoRequest);
       this.grpcClient.getAccountInfo(
         getAccountInfoRequest,
         {},
         (error, response): void => {
+          console.log("Account Info Response: ");
+          console.log(response);
+
+          console.log("Account Info Error:");
+          console.log(error);
           if (error != null || response == null) {
             reject(error);
             return;
