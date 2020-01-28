@@ -27,6 +27,7 @@ Xpring-JS is available as an NPM package. Simply install with:
 ```shell
 $ npm i xpring-js
 ```
+DO NOT SUBMIT
 
 ### Server Side Component
 The server side component sends client-side requests to an XRP Node.
